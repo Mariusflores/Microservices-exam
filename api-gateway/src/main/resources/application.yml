@@ -1,0 +1,49 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    loadbalancer:
+      ribbon:
+        enabled: false
+    consul:
+      enabled: true
+      discovery:
+        enabled: true
+        health-check-path: /actuator/health
+        query-passing: true
+      config:
+        enabled: true
+        data-key: application.yml
+        prefixes: config
+        format: yaml
+
+  gateway:
+    routes:
+      - id: book-service
+        uri: lb://book-service/
+        predicates:
+          - Path=/api/books
+      - id: library-catalog
+        uri: lb://library-catalog/
+        predicates:
+            - Path=/api/
+
+    globalcors:
+      cors-configurations:
+        '[/**]':
+          allowedOrigins: "http://localhost:3000"
+          allowedHeaders:
+            - "*"
+          allowedMethods:
+            - "GET"
+            - "POST"
+            - "OPTIONS"
+  config:
+    import: "optional:consul:"
+
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
