@@ -1,4 +1,4 @@
-package org.mada.exam.bookservice.services;
+package org.mada.exam.bookservice.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
