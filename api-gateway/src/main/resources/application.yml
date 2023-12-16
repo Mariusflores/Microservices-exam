@@ -4,10 +4,13 @@ server:
 spring:
   application:
     name: api-gateway
+  config:
+    import: "optional:consul:"
   cloud:
     loadbalancer:
       ribbon:
         enabled: false
+
     consul:
       host: localhost
       port: 8500
@@ -15,6 +18,11 @@ spring:
       discovery:
         health-check-path: /actuator/health
         query-passing: true
+      config:
+        data-key: application.yml
+        prefixes: config
+        format: yaml
+        default-context: defaults
 
     gateway:
       routes:
@@ -27,20 +35,17 @@ spring:
           predicates:
             - Path=/api/library/**
 
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "http://localhost:3000"
+            allowedHeaders:
+              - "*"
+            allowedMethods:
+              - "GET"
+              - "POST"
+              - "OPTIONS"
 
-
-    globalcors:
-      cors-configurations:
-        '[/**]':
-          allowedOrigins: "http://localhost:3000"
-          allowedHeaders:
-            - "*"
-          allowedMethods:
-            - "GET"
-            - "POST"
-            - "OPTIONS"
-  config:
-    import: "optional:consul:"
 
 logging:
   level:

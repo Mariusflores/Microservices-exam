@@ -19,6 +19,7 @@ public class BookService {
 
     public void createProduct(BookRequest bookRequest) {
         Book book = Book.builder()
+                .isbn(bookRequest.getIsbn())
                 .title(bookRequest.getTitle())
                 .author(bookRequest.getAuthor())
                 .releaseYear(bookRequest.getReleaseYear())
@@ -38,11 +39,16 @@ public class BookService {
     private BookResponse mapToBookResponse(Book book) {
 
         return BookResponse.builder()
+                .isbn(book.getIsbn())
                 .id(book.getId())
                 .title(book.getTitle())
                 .author(book.getAuthor())
                 .releaseYear(book.getReleaseYear())
                 .description(book.getDescription())
                 .build();
+    }
+
+    public void deleteAll() {
+        bookRepository.deleteAll();
     }
 }

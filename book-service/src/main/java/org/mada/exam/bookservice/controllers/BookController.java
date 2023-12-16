@@ -24,6 +24,13 @@ public class BookController {
 
     }
 
+    @DeleteMapping
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteBooks(){
+        bookService.deleteAll();
+    }
+
+
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<BookResponse> getAllBooks(){ return bookService.getAllBooks();}
