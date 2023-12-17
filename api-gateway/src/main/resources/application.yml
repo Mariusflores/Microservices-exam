@@ -33,7 +33,8 @@ spring:
         - id: library-catalog
           uri: lb://library-catalog/
           predicates:
-            - Path=/api/library/**
+            - Path=/api/catalog
+            - Path=/api/catalog/**
 
       globalcors:
         cors-configurations:

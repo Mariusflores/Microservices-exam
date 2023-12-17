@@ -2,6 +2,7 @@ package org.mada.exam.bookservice.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.mada.exam.bookservice.RabbitMQ.RabbitMQSender;
 import org.mada.exam.bookservice.dto.BookRequest;
 import org.mada.exam.bookservice.dto.BookResponse;
 import org.mada.exam.bookservice.model.Book;
@@ -15,6 +16,7 @@ import java.util.List;
 @Slf4j
 public class BookService {
 
+    private final RabbitMQSender sender;
     private final BookRepository bookRepository;
 
     public void createProduct(BookRequest bookRequest) {
@@ -27,7 +29,7 @@ public class BookService {
                 .build();
 
         bookRepository.save(book);
-
+        sender.sendMessage(book.getIsbn());
         log.info("product: {} is saved", book.getId());
     }
 
