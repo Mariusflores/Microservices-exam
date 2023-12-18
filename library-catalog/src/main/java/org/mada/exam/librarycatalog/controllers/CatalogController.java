@@ -15,11 +15,11 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class CatalogController {
 
-    private CatalogService catalogService;
+    private final CatalogService catalogService;
 
     @GetMapping()
     @ResponseStatus(HttpStatus.OK)
-    public Optional<CatalogResponse> isInStock(@RequestParam String isbn){
+    public List<CatalogResponse> isInStock(@RequestParam List<String> isbn){
         return catalogService.isAvailable(isbn);
     }
 
@@ -28,6 +28,8 @@ public class CatalogController {
     public List<CatalogRequest> findAll(){
         return catalogService.findAll();
     }
+
+
 
 
 

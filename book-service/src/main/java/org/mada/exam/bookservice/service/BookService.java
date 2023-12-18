@@ -29,7 +29,7 @@ public class BookService {
                 .build();
 
         bookRepository.save(book);
-        sender.sendMessage(book.getIsbn());
+        //sender.sendMessage(book.getIsbn());
         log.info("product: {} is saved", book.getId());
     }
 

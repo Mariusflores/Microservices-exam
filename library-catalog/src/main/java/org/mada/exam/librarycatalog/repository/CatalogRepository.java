@@ -8,5 +8,5 @@ import java.util.Optional;
 
 public interface CatalogRepository extends JpaRepository<Catalog, String> {
 
-    Optional<Catalog> findByIsbn(String isbn);
+    List<Catalog> findByIsbnIn(List<String> isbn);
 }

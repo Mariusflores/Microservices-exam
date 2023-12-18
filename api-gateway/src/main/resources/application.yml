@@ -30,11 +30,16 @@ spring:
           uri: lb://book-service/
           predicates:
             - Path=/api/books
+
         - id: library-catalog
           uri: lb://library-catalog/
           predicates:
             - Path=/api/catalog
-            - Path=/api/catalog/**
+
+        - id: reservation-service
+          uri: lb://reservation-service/
+          predicates:
+            - Path=/api/reservation
 
       globalcors:
         cors-configurations:

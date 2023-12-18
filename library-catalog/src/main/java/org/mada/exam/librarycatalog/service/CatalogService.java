@@ -22,13 +22,14 @@ public class CatalogService {
 
 
     @Transactional(readOnly = true)
-    public Optional<CatalogResponse> isAvailable(String isbn) {
-        return catalogRepository.findByIsbn(isbn)
+    public List<CatalogResponse> isAvailable(List<String> isbn) {
+        return catalogRepository.findByIsbnIn(isbn).stream()
                 .map(catalog ->
                         CatalogResponse.builder()
                                 .isbn(catalog.getIsbn())
                                 .isAvailable(catalog.getQuantityAvailable() > 0)
-                                .build());
+                                .build())
+                .toList();
     }
 
     public List<CatalogRequest> findAll(){
@@ -43,7 +44,7 @@ public class CatalogService {
                 .toList();
     }
 
-    public void AddBook(CatalogRequest request){
+    public void addBook(CatalogRequest request){
         Catalog catalog = Catalog.builder()
                 .isbn(request.getIsbn())
                 .quantity(request.getQuantity())
