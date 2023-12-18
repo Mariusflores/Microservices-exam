@@ -64,11 +64,9 @@ public class ReservationService {
 
     private ReservationLineItems mapToDto(ReservationLineItemsDto reservationLineItemsDto) {
 
-        ReservationLineItems reservationLineItems = ReservationLineItems.builder()
+        return ReservationLineItems.builder()
                 .isbn(reservationLineItemsDto.getIsbn())
                 .quantity(reservationLineItemsDto.getQuantity())
                 .build();
-
-        return reservationLineItems;
     }
 }
