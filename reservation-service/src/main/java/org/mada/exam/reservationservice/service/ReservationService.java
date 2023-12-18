@@ -26,7 +26,7 @@ public class ReservationService {
     private final WebClient.Builder webClientBuilder;
 
 
-    public void reserveBook(ReservationRequest reservationRequest){
+    public void reserveBook(ReservationRequest reservationRequest) {
 
         Reservation reservation = new Reservation();
         reservation.setReservationNumber(UUID.randomUUID().toString());
@@ -44,7 +44,7 @@ public class ReservationService {
 
         log.info(isbnNumbers.toString());
         //call catalog response, and place reservation if book is available
-        CatalogResponse[] catalogResponses =webClientBuilder.build().get()
+        CatalogResponse[] catalogResponses = webClientBuilder.build().get()
                 .uri("http://library-catalog/api/catalog",
                         uriBuilder -> uriBuilder.queryParam("isbn", isbnNumbers).build())
                 .retrieve()
@@ -54,9 +54,9 @@ public class ReservationService {
         boolean allBooksAvailable = Arrays.stream(catalogResponses).allMatch(CatalogResponse::isAvailable);
 
         log.info(reservation.toString());
-        if (allBooksAvailable){
+        if (allBooksAvailable) {
             reservationRepository.save(reservation);
-        }else{
+        } else {
             throw new IllegalArgumentException("Book(s) not available, please try again later");
         }
 
@@ -64,11 +64,9 @@ public class ReservationService {
 
     private ReservationLineItems mapToDto(ReservationLineItemsDto reservationLineItemsDto) {
 
-        ReservationLineItems reservationLineItems = ReservationLineItems.builder()
+        return ReservationLineItems.builder()
                 .isbn(reservationLineItemsDto.getIsbn())
                 .quantity(reservationLineItemsDto.getQuantity())
                 .build();
-
-        return reservationLineItems;
     }
 }

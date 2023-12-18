@@ -15,8 +15,6 @@ public class LibraryCatalogApplication {
     public static void main(String[] args) {
 
         SpringApplication.run(LibraryCatalogApplication.class, args);
-
-
     }
 
     @Bean
@@ -26,6 +24,24 @@ public class LibraryCatalogApplication {
             catalog.setIsbn("9781942788294");
             catalog.setQuantity(4);
             catalog.setQuantityAvailable(4);
+
+            catalogRepository.save(catalog);
+
+            catalog.setIsbn("9798579327079");
+            catalog.setQuantity(4);
+            catalog.setQuantityAvailable(4);
+
+            catalogRepository.save(catalog);
+
+            catalog.setIsbn("9780399590863");
+            catalog.setQuantity(2);
+            catalog.setQuantityAvailable(2);
+
+            catalogRepository.save(catalog);
+
+            catalog.setIsbn("9781324001805");
+            catalog.setQuantity(2);
+            catalog.setQuantityAvailable(2);
 
             catalogRepository.save(catalog);
         };

@@ -29,7 +29,7 @@ spring:
         - id: book-service
           uri: lb://book-service/
           predicates:
-            - Path=/api/books
+            - Path=/api/books/**
 
         - id: library-catalog
           uri: lb://library-catalog/

@@ -9,9 +9,7 @@ import org.mada.exam.librarycatalog.repository.CatalogRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.awt.print.Book;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -32,8 +30,8 @@ public class CatalogService {
                 .toList();
     }
 
-    public List<CatalogRequest> findAll(){
-        List<Catalog> catalog =  catalogRepository.findAll();
+    public List<CatalogRequest> findAll() {
+        List<Catalog> catalog = catalogRepository.findAll();
         return catalog.stream()
                 .map(c ->
                         CatalogRequest.builder()
@@ -44,7 +42,7 @@ public class CatalogService {
                 .toList();
     }
 
-    public void addBook(CatalogRequest request){
+    public void addBook(CatalogRequest request) {
         Catalog catalog = Catalog.builder()
                 .isbn(request.getIsbn())
                 .quantity(request.getQuantity())

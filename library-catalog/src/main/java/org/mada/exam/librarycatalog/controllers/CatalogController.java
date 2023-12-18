@@ -8,7 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/catalog")
@@ -19,20 +18,7 @@ public class CatalogController {
 
     @GetMapping()
     @ResponseStatus(HttpStatus.OK)
-    public List<CatalogResponse> isInStock(@RequestParam List<String> isbn){
+    public List<CatalogResponse> isInStock(@RequestParam List<String> isbn) {
         return catalogService.isAvailable(isbn);
     }
-
-    @GetMapping("/all")
-    @ResponseStatus(HttpStatus.OK)
-    public List<CatalogRequest> findAll(){
-        return catalogService.findAll();
-    }
-
-
-
-
-
-
-
 }

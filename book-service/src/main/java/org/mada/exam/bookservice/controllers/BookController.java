@@ -16,6 +16,16 @@ public class BookController {
 
     private final BookService bookService;
 
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    public List<BookResponse> getAllBooks(){ return bookService.getAllBooks();}
+
+
+    @GetMapping("/{value}")
+    public List<BookResponse> getByAuthorContainsOrTitleContainsOrGenreContains(@PathVariable("value") String value){
+        return bookService.getByAuthorContainsOrTitleContainsOrGenreContains(value);
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public void createBook(@RequestBody BookRequest bookRequest){
@@ -31,8 +41,6 @@ public class BookController {
     }
 
 
-    @GetMapping
-    @ResponseStatus(HttpStatus.OK)
-    public List<BookResponse> getAllBooks(){ return bookService.getAllBooks();}
+
 
 }

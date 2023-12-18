@@ -24,6 +24,7 @@ public class BookService {
                 .isbn(bookRequest.getIsbn())
                 .title(bookRequest.getTitle())
                 .author(bookRequest.getAuthor())
+                .genre(bookRequest.getGenre())
                 .releaseYear(bookRequest.getReleaseYear())
                 .description(bookRequest.getDescription())
                 .build();
@@ -45,6 +46,7 @@ public class BookService {
                 .id(book.getId())
                 .title(book.getTitle())
                 .author(book.getAuthor())
+                .genre(book.getGenre())
                 .releaseYear(book.getReleaseYear())
                 .description(book.getDescription())
                 .build();
@@ -52,5 +54,11 @@ public class BookService {
 
     public void deleteAll() {
         bookRepository.deleteAll();
+    }
+
+    public List<BookResponse> getByAuthorContainsOrTitleContainsOrGenreContains(String value) {
+
+        List<Book> books = bookRepository.findByAuthorContainsOrTitleContainsOrGenreContains(value);
+        return books.stream().map(this::mapToBookResponse).toList();
     }
 }
