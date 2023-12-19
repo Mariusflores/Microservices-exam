@@ -2,27 +2,6 @@ version: '3.8'
 
 services:
 
- # api-gateway:
- #   build:
- #     context: .
- #     dockerfile: api-gateway.Dockerfile
- #   ports:
- #     - "8080:8080"
- #   depends_on:
- #     - consul
-
- # book-service:
- #   build:
- #     context: .
- #     dockerfile: book-service.Dockerfile
- #   ports:
- #     - "0:0"
- #   depends_on:
- #     - mongodb
- #     - rabbitmq
-
-
-
   mongodb:
     image: mongo:latest
     ports:

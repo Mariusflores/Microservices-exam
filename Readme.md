@@ -1,6 +1,7 @@
 # Library management
 
-Notes: running the docker-compose.yml file will start up 
+### Running application:
+Running the docker-compose.yml file will start up 
 - mysql
 - mongodb
 - consul
@@ -9,10 +10,37 @@ Notes: running the docker-compose.yml file will start up
 as docker containers, with correct environments as specified in the application.properties files. 
 (if specified ports are not already occupied on the local machine)
 
+after doing this. Run each individual application by either starting the application through the IDE GUI
+or through command line:
+for each module, open a new terminal in input these commands
+```
+    cd api-gateway
+    mvn spring-boot:run
+```
+
+```
+    cd book-service
+    mvn spring-boot:run
+```
+```
+    cd library-catalog
+    mvn spring-boot:run
+```
+```
+    cd reservation-service
+    mvn spring-boot:run
+```
+
+
+
+
+
 I encountered a problem when building the docker files, since I had the modules inherit dependencies from the root module.
 The problem i encountered was that the parent pom was not accessible. I then made the decision to comment them out from the 
 docker-compose file and move on to other tasks.
 
+
+### User Stories
 
 ## Services:
 
@@ -138,7 +166,7 @@ for all books
         "isbn": "9798579327079",
         "quantity": 1
         
-    }{
+    },{
         "isbn": "9781324001805",
         "quantity": 1
     },
@@ -146,10 +174,20 @@ for all books
         "isbn": "9780399590863",
         "quantity": 1
         
-    },]
+    }]
 }
 ```
 
 When this endpoint gets called it uses a Webclient to do a synchronous
 call to the library catalog to check if books are 
 available for loan, if so the order is successful and gets stored in the database.
+
+
+
+### Architecture
+![img.png](img.png)
+
+i ended up using Synchronous communication between the library-catalog and reservation service
+as it seemed more appropriate. I also ended up using MySql database for the reservation service
+instead of mongodb.
+the user-service and notification-service were sadly not implemented because of lack of time.
