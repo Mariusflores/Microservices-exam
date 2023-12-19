@@ -1,7 +1,17 @@
 # Library management
 
+Notes: running the docker-compose.yml file will start up 
+- mysql
+- mongodb
+- consul
+- rabbitmq
 
+as docker containers, with correct environments as specified in the application.properties files. 
+(if specified ports are not already occupied on the local machine)
 
+I encountered a problem when building the docker files, since I had the modules inherit dependencies from the root module.
+The problem i encountered was that the parent pom was not accessible. I then made the decision to comment them out from the 
+docker-compose file and move on to other tasks.
 
 
 ## Services:
@@ -72,6 +82,9 @@ The book service features 2 endpoints
 - **/api/books/{value}**: this endpoint takes a string value as a path variable, and returns a list of books
 where the string value is featured in either author, genre or title fields in the database.
 it will also return if just a portion of field value is the same as the string, as it uses the "contains" query for search.
+
+This service was originally meant to use rabbitmq to publish an event to the library catalog when adding a book
+but i met with some problems and there was not enough time to implement it.
 
 
 ### Library Catalog
