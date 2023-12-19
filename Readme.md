@@ -54,6 +54,7 @@ Uses Consul discovery and routes http calls to its port, to the correct services
 
 ### Book Service
 
+
 i was not able to fully implement migrations for the book service, so values has to be added manually.
 to http://localhost:8080/api/books
 
@@ -98,10 +99,6 @@ to http://localhost:8080/api/books
     "description": "The greatest literary landmark of classical antiquity masterfully rendered by the most celebrated translator of our time"
 }
 ```
-
-
-
-
 
 The book service features 2 endpoints
 
