@@ -114,6 +114,20 @@ The book service features 2 endpoints
 where the string value is featured in either author, genre or title fields in the database.
 it will also return if just a portion of field value is the same as the string, as it uses the "contains" query for search.
 
+here are some examples of the use:
+```
+/api/books/phoenix
+```
+```
+/api/books/Homer
+```
+```
+/api/books/Novel
+```
+```
+/api/books/Gene%20Kim
+```
+
 This service was originally meant to use rabbitmq to publish an event to the library catalog when adding a book
 but i met with some problems and there was not enough time to implement it.
 
